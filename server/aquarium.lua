@@ -13,14 +13,16 @@ function Aquarium:__init()
 end
 
 function Aquarium:Ticker()
-	self.time = self.timer:GetMilliseconds() - self.lastRenderTime
-	if self.time < 1000 / updatesPerSecond then return end
+	self.time = self.timer:GetMilliseconds()
+	if self.time - self.lastRenderTime < 1000 / updatesPerSecond then return end
 	
 	local i = 1
 	while i <= #self.sharks do
 		self.sharks[i]:Update()
 		i = i + 1
 	end
+	
+	self.lastRenderTime = self.time
 end
 
 function Aquarium:NewShark(file)
