@@ -15,6 +15,7 @@ function Shark:__init()
 	local args     = {}
 	args.position  = Vector3()
 	args.angle     = Angle()
+	args.fixed     = false
 	args.model     = "sharkatron.3000.eez/go701-a.lod"
 	args.collision = "sharkatron.3000.eez/go701_lod1-a_col.pfx"
 	
