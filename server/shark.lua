@@ -66,8 +66,9 @@ function Shark:Parse(file, height)
 			self.reflect  = values[2] == "true" and true or false
 			first         = false
 		else
-			if #values < 3 then return false end
-			table.insert(self.targets, Vector3(tonumber(values[1]), tonumber(values[2]), tonumber(values[3])))
+			if #values >= 3 then 
+				table.insert(self.targets, Vector3(tonumber(values[1]), tonumber(values[2]), tonumber(values[3])))
+			end
 		end
 	end
 	
