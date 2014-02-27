@@ -7,6 +7,7 @@ class 'Shark'
 function Shark:__init()
 	self.targets   = {}
 	self.velocity  = 0
+	self.height    = 0
 	self.reflect   = true
 	
 	self.current   = 0
@@ -16,8 +17,8 @@ function Shark:__init()
 	args.position  = Vector3()
 	args.angle     = Angle()
 	args.fixed     = false
-	args.model     = "sharkatron.3000.eez/go701-a.lod"
-	args.collision = "sharkatron.3000.eez/go701_lod1-a_col.pfx"
+	args.model     = model
+	args.collision = collision
 	
 	self.object    = StaticObject.Create(args)
 end
@@ -28,7 +29,7 @@ function Shark:Update()
 	self.object:SetAngle(Angle(-math.atan2(distance.z, distance.x) - (math.pi / 2), 0, 0))
 	
 	position   = position - (self.object:GetAngle() * Vector3.Forward) * self.velocity
-	position.y = 198
+	position.y = self.height
 	self.object:SetPosition(position)
 	
 	if distance:Length() < targetDistance then self:Select(self.current, false) end
@@ -51,7 +52,7 @@ function Shark:Select(index, place)
 	self.current = index
 end
 
-function Shark:Parse(file)
+function Shark:Parse(file, height)
 	local file = io.open(file, "r")
 	if file == nil then return false end
 	
@@ -72,6 +73,7 @@ function Shark:Parse(file)
 	
 	if #self.targets < 2 then return false end
 	
+	self.height = height or defaultHeight
 	self:Select(1, true)
 	return true
 end
