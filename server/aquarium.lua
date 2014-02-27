@@ -25,9 +25,9 @@ function Aquarium:Ticker()
 	self.lastRenderTime = self.time
 end
 
-function Aquarium:NewShark(file)
+function Aquarium:NewShark(file, height)
 	local shark  = Shark()
-	local result = shark:Parse(file)
+	local result = shark:Parse(file, height)
 	if result then 
 		table.insert(self.sharks, shark)
 		--print("shark " .. file .. " - " .. " loaded")
